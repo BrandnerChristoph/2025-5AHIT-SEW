@@ -8,14 +8,18 @@ namespace DesignPatternBuilder
 {
     public class GardenHouseDirector
     {
-        public House Construct(IHouseBuilder houseBuilder)
+        public IHouseBuilder Construct(IHouseBuilder houseBuilder)
         {
             return houseBuilder.SetDoorType("single door")
                                 .SetFloors(1)
                                 .SetRoof("Flat")
-                                .SetWalls("wood")
-                                .Build();
+                                .SetWalls("wood");
 
+        }
+
+        public IHouseBuilder BuildMinimalViableProduct()
+        {
+            return new HouseBuilder().SetWalls("straw").SetWindows(0);
         }
     }
 }

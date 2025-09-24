@@ -21,9 +21,11 @@ List<House> houses = new List<House>();
     House defaultHouse = houseBuilder.Build();
     houses.Add(defaultHouse);
 
-    // Standard-Gartenhaus erstellen
-    GardenHouseDirector gh = new GardenHouseDirector();
-    houses.Add(gh.Construct(new GardenHouseBuilder()));
+// Standard-Gartenhaus erstellen
+    IHouseBuilder gardenMinHouse = new GardenHouseBuilder();
+    GardenHouseDirector ghDirector = new GardenHouseDirector();
+    ghDirector.BuildMinimalViableProduct();
+    houses.Add(gardenMinHouse.Build());
 
     // leere Instanz erstellen (ohne Director)
     houses.Add(new HouseBuilder()
