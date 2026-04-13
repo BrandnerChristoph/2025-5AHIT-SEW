@@ -1,0 +1,53 @@
+﻿<Window x:Class="StudentGradeManagement.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StudentGradeManagement"
+        mc:Ignorable="d"
+        Title="StudentGradeManagement" Height="450" Width="800">
+    
+    <StackPanel Margin="10">
+
+        <!-- Schüler hinzufügen / löschen -->
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+            <Button Content="Schüler hinzufügen" Command="{Binding AddStudentCommand}" Margin="5"/>
+            <Button Content="Schüler löschen" Command="{Binding DeleteStudentCommand}" Margin="5"/>
+        </StackPanel>
+
+        <!-- Schülerliste -->
+        <DataGrid ItemsSource="{Binding Students}" 
+                  SelectedItem="{Binding SelectedStudent}" 
+                  AutoGenerateColumns="False" Height="150" Margin="0,0,0,10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Klasse" Binding="{Binding Class}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Neue Note hinzufügen -->
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10" HorizontalAlignment="Center">
+            <Label Content="Fach:" VerticalAlignment="Center"/>
+            <TextBox Width="100" Text="{Binding NewSubject, UpdateSourceTrigger=PropertyChanged}" Margin="5,0"/>
+
+            <Label Content="Note:" VerticalAlignment="Center"/>
+            <TextBox Width="50" Text="{Binding NewGradeValue, UpdateSourceTrigger=PropertyChanged}" Margin="5,0"/>
+
+            <Button Content="Note hinzufügen" Command="{Binding AddGradeCommand}" Margin="5,0"/>
+        </StackPanel>
+
+        <!-- Noten anzeigen -->
+        <TextBlock Text="Noten:" FontWeight="Bold" Margin="0,0,0,5"/>
+        <ListBox ItemsSource="{Binding SelectedStudent.Grades}" Height="100">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Subject}" />
+                        <TextBlock Text=": " />
+                        <TextBlock Text="{Binding Value}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </StackPanel>
+</Window>
