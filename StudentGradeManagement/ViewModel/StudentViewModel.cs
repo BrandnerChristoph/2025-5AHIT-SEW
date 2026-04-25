@@ -19,7 +19,6 @@ namespace StudentGradeManagement.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
-
         public ObservableCollection<Student> Students { get; set; } = new();
 
         private Student _selectedStudent;
